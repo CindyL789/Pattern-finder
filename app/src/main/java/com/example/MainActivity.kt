@@ -36,6 +36,7 @@ import com.example.ui.screens.ProjectsScreen
 import com.example.ui.screens.StashScreen
 import com.example.ui.screens.ToolsScreen
 import com.example.ui.theme.LoopCrochetTheme
+import com.example.ui.viewmodel.AiPatternGeneratorViewModel
 import com.example.ui.viewmodel.AuthViewModel
 import com.example.ui.viewmodel.CrochetViewModel
 import com.example.ui.viewmodel.GeminiAssistantViewModel
@@ -44,6 +45,7 @@ class MainActivity : ComponentActivity() {
 
     private val crochetViewModel: CrochetViewModel by viewModels()
     private val assistantViewModel: GeminiAssistantViewModel by viewModels()
+    private val aiPatternViewModel: AiPatternGeneratorViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +59,7 @@ class MainActivity : ComponentActivity() {
                 LoopCrochetApp(
                     crochetViewModel = crochetViewModel,
                     assistantViewModel = assistantViewModel,
+                    aiPatternViewModel = aiPatternViewModel,
                     authViewModel = authViewModel
                 )
             }
@@ -68,6 +71,7 @@ class MainActivity : ComponentActivity() {
 fun LoopCrochetApp(
     crochetViewModel: CrochetViewModel,
     assistantViewModel: GeminiAssistantViewModel,
+    aiPatternViewModel: AiPatternGeneratorViewModel,
     authViewModel: AuthViewModel
 ) {
     val navController = rememberNavController()
@@ -137,6 +141,7 @@ fun LoopCrochetApp(
                     onSelectProject = { project ->
                         crochetViewModel.selectProject(project)
                     },
+                    onNavigateToAssistant = { navController.navigate(Screen.Assistant.route) },
                     onNavigateToProGuild = { navController.navigate(Screen.ProGuild.route) },
                     onNavigateToAccount = { navController.navigate(Screen.Account.route) },
                     authViewModel = authViewModel
@@ -171,7 +176,12 @@ fun LoopCrochetApp(
 
             composable(Screen.Assistant.route) {
                 AssistantScreen(
-                    viewModel = assistantViewModel
+                    assistantViewModel = assistantViewModel,
+                    aiPatternViewModel = aiPatternViewModel,
+                    onStartProject = { project ->
+                        crochetViewModel.selectProject(project)
+                        navController.navigate(Screen.Counter.route)
+                    }
                 )
             }
 

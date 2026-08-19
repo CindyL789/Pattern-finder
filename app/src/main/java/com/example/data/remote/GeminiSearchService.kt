@@ -24,7 +24,7 @@ object GeminiSearchService {
 
     suspend fun searchPatternsWithGemini(userQuery: String): List<CrochetPattern>? = withContext(Dispatchers.IO) {
         val apiKey = BuildConfig.GEMINI_API_KEY
-        if (apiKey.isBlank() || apiKey == "MY_GEMINI_API_KEY") {
+        if (apiKey.isBlank() || apiKey == "MY_GEMINI_API_KEY" || apiKey == "YOUR_GEMINI_API_KEY") {
             return@withContext null
         }
 

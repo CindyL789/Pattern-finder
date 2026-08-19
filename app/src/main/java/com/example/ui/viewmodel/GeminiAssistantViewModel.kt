@@ -114,7 +114,7 @@ class GeminiAssistantViewModel : ViewModel() {
             ""
         }
 
-        if (apiKey.isBlank() || apiKey == "MY_GEMINI_API_KEY") {
+        if (apiKey.isBlank() || apiKey == "MY_GEMINI_API_KEY" || apiKey == "YOUR_GEMINI_API_KEY") {
             return@withContext "API Key not configured in Secrets panel. Here's a tip: You can convert US to UK terms easily in the Tools tab, or check yarn weights in your Stash!"
         }
 
