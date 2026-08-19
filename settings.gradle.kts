@@ -22,6 +22,6 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "Pattern Hub"
+rootProject.name = "Stitch Mind"
 
 include(":app")
