@@ -11,36 +11,50 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
-private val DarkColorScheme = darkColorScheme(
-    primary = TerracottaPrimaryDark,
-    secondary = SageSecondaryDark,
-    tertiary = RoseTertiaryDark,
-    background = DarkBackground,
-    surface = DarkSurface,
-    surfaceVariant = DarkSurfaceVariant,
-    onPrimary = Color.Black,
-    onSecondary = Color.Black,
-    onBackground = Color(0xFFF0EAE1),
-    onSurface = Color(0xFFF0EAE1)
-)
-
 private val LightColorScheme = lightColorScheme(
     primary = TerracottaPrimary,
-    secondary = SageSecondary,
-    tertiary = RoseTertiary,
-    background = WarmCreamBackground,
-    surface = CreamWhiteSurface,
-    surfaceVariant = OatmealSurfaceVariant,
     onPrimary = Color.White,
+    primaryContainer = TerracottaPrimaryContainer,
+    onPrimaryContainer = TerracottaOnPrimaryContainer,
+    secondary = SageSecondary,
     onSecondary = Color.White,
-    onBackground = Color(0xFF2C221E),
-    onSurface = Color(0xFF2C221E)
+    secondaryContainer = SageSecondaryContainer,
+    onSecondaryContainer = SageOnSecondaryContainer,
+    tertiary = HoneyTertiary,
+    onTertiary = HoneyOnTertiaryContainer,
+    tertiaryContainer = HoneyTertiaryContainer,
+    onTertiaryContainer = HoneyOnTertiaryContainer,
+    background = WarmBackground,
+    onBackground = WarmOnSurface,
+    surface = WarmSurface,
+    onSurface = WarmOnSurface,
+    surfaceVariant = WarmSurfaceVariant,
+    onSurfaceVariant = WarmOnSurfaceVariant
+)
+
+private val DarkColorScheme = darkColorScheme(
+    primary = TerracottaPrimary,
+    onPrimary = Color.White,
+    primaryContainer = Color(0xFF5C2B1E),
+    onPrimaryContainer = Color(0xFFF7ECE1),
+    secondary = SageSecondary,
+    onSecondary = Color.Black,
+    secondaryContainer = Color(0xFF284437),
+    onSecondaryContainer = Color(0xFFE8F3EE),
+    tertiary = HoneyTertiary,
+    onTertiary = Color.Black,
+    background = Color(0xFF1C1A19),
+    onBackground = Color(0xFFEFE8E1),
+    surface = Color(0xFF262322),
+    onSurface = Color(0xFFEFE8E1),
+    surfaceVariant = Color(0xFF383230),
+    onSurfaceVariant = Color(0xFFD4C8BF)
 )
 
 @Composable
-fun CrochetTheme(
+fun LoopCrochetTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false, // Set false to preserve our custom warm theme
+    dynamicColor: Boolean = false, // Keep default consistent brand colors
     content: @Composable () -> Unit,
 ) {
     val colorScheme = when {
@@ -52,10 +66,15 @@ fun CrochetTheme(
         else -> LightColorScheme
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    MaterialTheme(colorScheme = colorScheme, typography = Typography, content = content)
+}
+
+@Composable
+fun MyApplicationTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    dynamicColor: Boolean = false,
+    content: @Composable () -> Unit
+) {
+    LoopCrochetTheme(darkTheme = darkTheme, dynamicColor = dynamicColor, content = content)
 }
 
