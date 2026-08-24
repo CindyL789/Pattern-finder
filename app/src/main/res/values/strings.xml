@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Stitch Mind</string>
+    <string name="privacy_policy_url">https://YOUR-DOMAIN.example/privacy</string>
 </resources>
